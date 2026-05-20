@@ -1,9 +1,9 @@
-<?php
+// config.php
 return [
-    'host' => '127.0.1.27',
-    'port' => 3306,
-    'database' => 'nova_shop',
-    'username' => 'root',
-    'password' => '',
-    'charset' => 'utf8mb4',
+    'host'     => 'postgres-production-e891.up.railway.app', // публичный адрес
+    'port'     => 5432,
+    'dbname'   => 'railway', // имя базы (чаще всего 'railway')
+    'user'     => 'postgres', // пользователь (чаще всего 'postgres')
+    'password' => 'admin', // настоящий пароль
+    'sslmode'  => 'require', // Railway требует SSL
 ];
