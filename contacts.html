@@ -7,8 +7,7 @@
   <link rel="stylesheet" href="css-style.css" />
   <noscript><style>body{visibility:visible!important}</style></noscript>
   <style id="anti-flicker-inline">html:not(.app-ready) body{visibility:hidden}html.app-ready body{visibility:visible}</style>
-
-<style>
+  <style>
     html{background:#070A12}
     .contacts-stack{display:grid; gap:12px}
     .pill{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:999px;
@@ -46,7 +45,7 @@
     <div class="section-head">
       <div>
         <h3>Контакты</h3>
-        <p>Напиши нам — поможем подобрать мебель под твою комнату и бюджет.</p>
+        <p>Напишите нам — поможем подобрать мебель, уточнить заказ или принять заявку на возврат.</p>
       </div>
     </div>
 
@@ -69,8 +68,6 @@
           <div class="notice">
             <b>Адрес</b><br/>
             <span class="small">Россия, Кировская область, г. Яранск, ул. Ленина, д. 11.</span>
-            <div style="grid-template-columns:1fr 1fr; gap:10px; margin-top:10px">
-            </div>
           </div>
 
           <div class="notice">
@@ -100,39 +97,79 @@
             <span class="small">Оформим документы, поможем с обменом.</span>
           </div>
         </div>
-
-        <div class="hr"></div>
-
-        <h4>Частые вопросы</h4>
-        <div class="grid" style="gap:10px">
-          <div class="notice"><b>Сколько стоит доставка?</b><br/><span class="small">Зависит от адреса и объёма заказа. Напиши нам — посчитаем.</span></div>
-          <div class="notice"><b>Можно ли заказать в других цветах?</b><br/><span class="small">Да, для части моделей доступны варианты отделки.</span></div>
-          <div class="notice"><b>Как оформить заказ?</b><br/><span class="small">Оставь заявку — мы перезвоним и уточним детали.</span></div>
-        </div>
       </div>
-
 
       <div class="panel">
-      <div class="card" style="padding:14px">
-        <h3 class="title">Мы на карте</h3>
-        <div style="height:800px; border-radius:28px; overflow:hidden; border:1px solid rgba(255,255,255,.12)">
-          <iframe
-            width="100%" height="800" style="border:0"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=Россия,Кировская%20область,Яранск,Ленина%2011&output=embed">
-          </iframe>
-        </div>
+        <div class="card" style="padding:14px">
+          <h3 class="title">Мы на карте</h3>
+          <div style="height:420px; border-radius:28px; overflow:hidden; border:1px solid rgba(255,255,255,.12)">
+            <iframe
+              width="100%" height="420" style="border:0"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Россия,Кировская%20область,Яранск,Ленина%2011&output=embed">
+            </iframe>
+          </div>
         </div>
       </div>
-      
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="panel">
+      <div class="section-head" style="margin-bottom:16px">
+        <div>
+          <h3>Оформить возврат товара</h3>
+          <p>Если после покупки обнаружился брак или проблема с комплектацией, заявку можно оставить прямо на сайте.</p>
+        </div>
+      </div>
+      <div id="returnGuestState" class="return-helper">
+        <span class="small">Чтобы оформить возврат, войдите в аккаунт, с которого была совершена покупка.</span>
+      </div>
+      <div id="returnReadyState" class="return-helper hidden"></div>
+      <form id="returnForm" class="review-form hidden">
+        <div class="field full">
+          <label for="return-purchase">Товар из заказа</label>
+          <select id="return-purchase" required></select>
+        </div>
+        <div class="field return-reason-field pay-fields">
+          <label for="return-reason">Причина</label>
+          <select id="return-reason" class="return-select" required>
+            <option value="Брак">Брак</option>
+            <option value="Повреждение при доставке">Повреждение при доставке</option>
+            <option value="Некомплект">Некомплект</option>
+            <option value="Другое">Другое</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="return-contact">Контакт для связи</label>
+          <input id="return-contact" type="text" placeholder="Телефон или email" />
+        </div>
+        <div class="field full">
+          <label for="return-comment">Описание проблемы</label>
+          <textarea id="return-comment" rows="5" placeholder="Опишите, какой дефект обнаружен и что нужно проверить" required></textarea>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; grid-column:1/-1">
+          <button class="btn primary" type="submit">Отправить заявку</button>
+          <span class="small">Заявка появится у администратора в панели модерации.</span>
+        </div>
+      </form>
+
+      <div id="returnStatusSection" class="hidden" style="margin-top:18px">
+        <div class="account-box-head" style="margin-bottom:14px">
+          <div>
+            <h3>Статус заявок</h3>
+            <p class="muted">После решения администратора здесь появится отметка об одобрении или отказе.</p>
+          </div>
+        </div>
+        <div id="returnStatusList" class="return-status-list"></div>
+      </div>
+    </div>
   </section>
 </main>
 
 <script src="js-data.js"></script>
 <script src="js-common.js"></script>
-<script>
-  UI.injectLayout();
-</script>
+<script src="js-page-contacts.js"></script>
 </body>
 </html>

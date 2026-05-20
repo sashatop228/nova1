@@ -7,34 +7,38 @@
   <link rel="stylesheet" href="css-style.css" />
   <noscript><style>body{visibility:visible!important}</style></noscript>
   <style id="anti-flicker-inline">html:not(.app-ready) body{visibility:hidden}html.app-ready body{visibility:visible}</style>
-
-<style>
-    html{background:#070A12}
-  </style>
+  <style>html{background:#070A12}</style>
 </head>
 <body>
-
 <main class="container">
   <section class="section">
-    <div class="pill small"><a href="catalog.html">Каталог</a> <span class="small">→</span> <span id="crumb">Товар</span></div>
-    <div class="hr"></div>
+    <div class="section-head">
+      <div>
+        <h3 id="title">Товар</h3>
+        <p class="small"><a href="catalog.html">Каталог</a> / <span id="crumb"></span></p>
+      </div>
+      <a class="btn" href="catalog.html">← Назад в каталог</a>
+    </div>
 
-    <div class="product">
-      <div class="gallery" id="gallery"></div>
+    <div class="grid product-layout" style="grid-template-columns:1.05fr .95fr; gap:16px">
+      <div class="card product-media-card">
+        <div class="product-hero" id="gallery" style="height:460px; border-radius:28px"></div>
+      </div>
 
-      <div class="info">
-        <h2 id="title"></h2>
-        <div class="meta" id="meta"></div>
+      <div class="panel product-info-panel">
+        <div class="row wrap" id="meta" style="gap:8px; margin-bottom:10px"></div>
 
-        <div class="price">
+        <div class="price big" style="margin:6px 0 12px">
           <b id="price"></b>
           <s id="old"></s>
-          <span class="pill small" id="stock"></span>
         </div>
 
-        <div class="hr"></div>
+        <div class="notice">
+          <b>Наличие</b><br/>
+          <span class="small" id="stock"></span>
+        </div>
 
-        <div class="grid" style="grid-template-columns:1fr 1fr; gap:10px">
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px; margin-top:12px">
           <div class="notice">
             <b>Размер</b><br/>
             <span class="small" id="size"></span>
@@ -53,7 +57,7 @@
 
         <div class="notice" style="margin-top:14px">
           <b>Как заказать</b><br/>
-          <span class="small">Напишите нам — мы уточним наличие, цвет и сроки доставки.</span>
+          <span class="small">Добавьте товар в корзину, оформите заказ, а после покупки сможете оставить отзыв именно на этот товар.</span>
           <div class="hr"></div>
           <div class="actions" style="margin-top:10px">
             <button class="btn primary small" type="button" id="addToCartBtn">Добавить в корзину</button>
@@ -62,6 +66,18 @@
         </div>
       </div>
     </div>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>Отзывы о товаре</h3>
+          <p>Публикуются только отзывы от покупателей, которые реально оформили этот товар.</p>
+        </div>
+        <a class="btn" id="productReviewBtn" href="reviews.html">Оставить отзыв</a>
+      </div>
+      <div id="productReviewsEmpty" class="notice">Пока опубликованных отзывов по этому товару нет.</div>
+      <div id="productReviewsList" class="reviews-grid hidden"></div>
+    </section>
 
     <section class="section">
       <div class="section-head">
@@ -75,7 +91,6 @@
     </section>
   </section>
 </main>
-
 <script src="js-data.js"></script>
 <script src="js-common.js"></script>
 <script src="js-page-product.js"></script>

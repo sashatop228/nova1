@@ -17,7 +17,7 @@
         <div class="account-topline">
           <div>
             <h2 class="account-title">Аккаунт</h2>
-            <p class="account-subtitle">Войдите, чтобы увидеть избранное, историю заказов и быстрый доступ к покупкам.</p>
+            <p class="account-subtitle">Войдите, чтобы увидеть историю заказов, оставить отзыв на купленный товар или оформить возврат по браку.</p>
           </div>
           <a class="btn account-cta" href="catalog.html">Перейти в каталог</a>
         </div>
@@ -27,13 +27,13 @@
             <div class="account-panel-head">
               <div>
                 <h3>Вход</h3>
-                <p class="muted">Сначала открывается страница входа. Если аккаунта ещё нет, ниже доступна отдельная страница регистрации.</p>
+                <p class="muted">Войдите, чтобы посмотреть историю заказов, оставить отзыв на купленный товар и отслеживать заявки на возврат.</p>
               </div>
             </div>
             <form id="loginForm" class="form-grid auth-form" style="margin-top:16px">
               <div class="field full">
-                <label for="loginEmail">Email</label>
-                <input id="loginEmail" type="email" placeholder="mail@example.com" required />
+                <label for="loginEmail">Логин</label>
+                <input id="loginEmail" type="text" placeholder="Введите логин" required />
               </div>
               <div class="field full">
                 <label for="loginPassword">Пароль</label>
@@ -56,19 +56,22 @@
       <div class="account-shell">
         <div class="account-topline">
           <div>
-            <h2 class="account-title">Аккаунт</h2>
-            <p id="accountMeta" class="account-subtitle">Избранное и последний заказ.</p>
+            <h2 class="account-title">Личный кабинет</h2>
+            <p id="accountMeta" class="account-subtitle">История покупок и быстрые действия.</p>
           </div>
-          <a class="btn account-cta" href="catalog.html">Добавить товары →</a>
+          <div class="account-top-actions">
+            <a class="btn account-cta" href="catalog.html">Добавить товары →</a>
+            <button class="btn danger account-logout-top" id="accountLogoutBtn" type="button">Выйти</button>
+          </div>
         </div>
 
         <div class="account-grid">
           <article class="panel account-box account-favorites">
             <div class="account-box-head">
-              <h3>Избранное</h3>
+              <h3>Что доступно</h3>
             </div>
             <div class="account-empty-card">
-              <span id="favoritesText">В избранном пока пусто.</span>
+              <span id="favoritesText">После покупки можно оставить отзыв только на купленный товар или оформить заявку на возврат.</span>
             </div>
           </article>
 
@@ -92,6 +95,7 @@
                 <span>Итого</span>
                 <strong id="lastOrderTotal"></strong>
               </div>
+              <div class="small" style="margin-top:8px">Доставка: <span id="lastOrderDelivery"></span></div>
               <div class="account-order-actions">
                 <a class="btn primary" href="catalog.html">Сделать новый заказ</a>
                 <button class="btn danger" id="logoutBtn" type="button">Выйти</button>
@@ -109,6 +113,69 @@
           </div>
           <div id="ordersList" class="order-list account-history-grid"></div>
         </div>
+
+        <div id="returnsArchiveWrap" class="account-archive-wrap hidden">
+          <div class="account-box-head account-archive-head">
+            <div>
+              <h3>Мои возвраты</h3>
+              <p class="muted">Здесь отображается решение по каждой заявке: новая, в работе, одобрена или отклонена.</p>
+            </div>
+          </div>
+          <div id="returnsList" class="return-status-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="accountAdmin" class="hidden account-dashboard-view">
+      <div class="account-shell admin-dashboard-grid">
+        <div class="account-topline">
+          <div>
+            <h2 class="account-title">Админ-панель</h2>
+            <p id="adminMeta" class="account-subtitle">Управление каталогом и клиентским сервисом.</p>
+          </div>
+          <button class="btn danger" id="adminLogoutBtn" type="button">Выйти</button>
+        </div>
+
+        <div id="adminStats" class="admin-stats"></div>
+
+        <section class="panel">
+          <div class="account-box-head"><h3>Добавить карточку товара</h3></div>
+          <form id="adminProductForm" class="form-grid" style="margin-top:16px">
+            <div class="field"><label>Название</label><input type="text" name="title" placeholder="Например, Диван Aurora Soft" required /></div>
+            <div class="field"><label>Категория</label><input type="text" name="category" placeholder="Диваны" required /></div>
+            <div class="field"><label>Цена</label><input type="number" min="1" name="price" placeholder="69990" required /></div>
+            <div class="field"><label>Старая цена</label><input type="number" min="0" name="oldPrice" placeholder="79990" /></div>
+            <div class="field"><label>Материал</label><input type="text" name="material" placeholder="Велюр" /></div>
+            <div class="field"><label>Цвет</label><input type="text" name="color" placeholder="Бежевый" /></div>
+            <div class="field"><label>Остаток</label><input type="number" min="0" name="stockCount" placeholder="5" /></div>
+            <div class="field"><label>Срок доставки, дней</label><input type="number" min="1" name="deliveryDays" placeholder="4" /></div>
+            <div class="field full"><label>Размер</label><input type="text" name="size" placeholder="220×95×85" /></div>
+            <div class="field full"><label>Изображение (URL или путь)</label><input type="text" name="image" placeholder="assets/img/products/new-sofa.jpg" /></div>
+            <div class="field full"><label>Теги через запятую</label><input type="text" name="tags" placeholder="Новинка, Хит, Велюр" /></div>
+            <div class="field full"><label>Описание</label><textarea name="description" rows="4" placeholder="Краткое описание товара"></textarea></div>
+            <div class="field full"><button class="btn primary" type="submit">Добавить товар</button></div>
+          </form>
+        </section>
+
+        <section class="panel">
+          <div class="account-box-head"><h3>Управление остатками</h3></div>
+          <div id="adminInventory" class="admin-card-list" style="margin-top:16px"></div>
+        </section>
+
+        <section class="panel">
+          <div class="account-box-head"><h3>Модерация отзывов</h3></div>
+          <div id="adminReviewsQueue" class="admin-queue-list" style="margin-top:16px"></div>
+        </section>
+
+        <section class="panel">
+          <div class="account-box-head"><h3>Заявки на возврат</h3></div>
+          <div id="adminReturnsQueue" class="admin-queue-list" style="margin-top:16px"></div>
+        </section>
+
+        <section class="panel">
+          <div class="account-box-head"><h3>Последние заказы</h3></div>
+          <div id="adminOrdersList" class="admin-orders-list" style="margin-top:16px"></div>
+        </section>
       </div>
     </div>
   </section>

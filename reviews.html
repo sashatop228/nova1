@@ -15,37 +15,27 @@
     <div class="section-head">
       <div>
         <h3>Отзывы покупателей</h3>
-        <p>Здесь собраны уже опубликованные отзывы о магазине «Нова» и форма для отправки нового отзыва.</p>
+        <p>Здесь отображаются опубликованные отзывы. Новые отзывы могут оставить только покупатели, которые действительно приобрели товар.</p>
       </div>
       <a class="btn" href="catalog.html">Перейти в каталог</a>
     </div>
 
-    <div class="reviews-grid">
-      <article class="review-card">
-        <div class="stars">★★★★★</div>
-        <p>Заказывали угловой диван для гостиной. Доставили аккуратно, собрали в тот же день, ткань выглядит даже лучше, чем на фото.</p>
-        <div class="author">Марина</div>
-        <div class="meta">Киров</div>
-      </article>
-      <article class="review-card">
-        <div class="stars">★★★★★</div>
-        <p>Понравилось, что менеджер помог подобрать стол под размеры кухни. Всё пришло вовремя, упаковка была надёжная.</p>
-        <div class="author">Илья</div>
-        <div class="meta">Яранск</div>
-      </article>
-      <article class="review-card">
-        <div class="stars">★★★★☆</div>
-        <p>Брали кровать и две тумбы. Сервис вежливый, сборка быстрая. Отдельный плюс за понятные ответы по срокам доставки.</p>
-        <div class="author">Светлана</div>
-        <div class="meta">Котельнич</div>
-      </article>
-    </div>
+    <div id="reviewsEmpty" class="reviews-empty hidden">Опубликованных отзывов пока нет.</div>
+    <div id="reviewsList" class="reviews-grid"></div>
   </section>
 
   <section class="section">
     <div class="panel">
-      <h4 style="margin-bottom:12px">Оставить отзыв</h4>
-      <form class="review-form" id="reviewForm">
+      <h4 style="margin-bottom:12px">Оставить отзыв о купленном товаре</h4>
+      <div id="reviewGuestState" class="review-helper">
+        <span class="small">Чтобы оставить отзыв, войдите в аккаунт покупателя. Отзыв можно отправить только для уже купленного товара.</span>
+      </div>
+      <div id="reviewReadyState" class="review-helper hidden"></div>
+      <form class="review-form hidden" id="reviewForm">
+        <div class="field full">
+          <label for="review-purchase">Купленный товар</label>
+          <select id="review-purchase" required></select>
+        </div>
         <div class="field">
           <label for="review-name">Ваше имя</label>
           <input id="review-name" type="text" placeholder="Например, Анна" required />
@@ -67,11 +57,11 @@
         </div>
         <div class="field" style="grid-column:1/-1">
           <label for="review-text">Текст отзыва</label>
-          <textarea id="review-text" rows="5" placeholder="Расскажите о покупке, доставке и впечатлениях" required></textarea>
+          <textarea id="review-text" rows="5" placeholder="Расскажите о качестве товара, доставке и впечатлениях" required></textarea>
         </div>
         <div style="grid-column:1/-1; display:flex; gap:10px; flex-wrap:wrap">
           <button class="btn primary" type="submit">Отправить отзыв</button>
-          <span class="small">После отправки отзыв попадёт на модерацию.</span>
+          <span class="small">После отправки отзыв попадёт на модерацию администратора.</span>
         </div>
       </form>
     </div>

@@ -1,0 +1,20 @@
+<?php
+require_once __DIR__ . '/../bootstrap.php';
+$user = require_login();
+$data = json_input();
+$orderId = trim((string)($data['orderId'] ?? ''));
+$productId = trim((string)($data['productId'] ?? ''));
+$text = trim((string)($data['text'] ?? ''));
+$rating = max(1, min(5, (int)($data['rating'] ?? 5)));
+if ($orderId === '' || $productId === '') respond(['ok'=>false, 'error'=>'Выберите купленный товар.'], 422);
+if (!has_purchased_product((int)$user['id'], $productId, $orderId)) respond(['ok'=>false, 'error'=>'Оценить можно только реально купленный товар.'], 422);
+if ($text === '') respond(['ok'=>false, 'error'=>'Напишите текст отзыва.'], 422);
+$stmt = db()->prepare('SELECT COUNT(*) FROM reviews WHERE user_email = ? AND order_id = ? AND product_id = ? AND status <> ?');
+$stmt->execute([$user['email'], $orderId, $productId, 'rejected']);
+if ((int)$stmt->fetchColumn() > 0) respond(['ok'=>false, 'error'=>'Отзыв на этот товар по выбранной покупке уже отправлен.'], 409);
+$p = db()->prepare('SELECT title FROM products WHERE id = ?'); $p->execute([$productId]); $title = $p->fetchColumn() ?: $productId;
+$id = 'review-' . time() . '-' . rand(1000,9999);
+$stmt = db()->prepare('INSERT INTO reviews (id, order_id, product_id, product_title, user_email, user_name, city, rating, text_content, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+$createdAt = date('Y-m-d H:i:s');
+$stmt->execute([$id, $orderId, $productId, $title, $user['email'], $user['name'], trim((string)($data['city'] ?? '')), $rating, $text, 'pending', $createdAt]);
+respond(['ok'=>true, 'review'=>['id'=>$id, 'orderId'=>$orderId, 'productId'=>$productId, 'productTitle'=>$title, 'userEmail'=>$user['email'], 'userName'=>$user['name'], 'city'=>trim((string)($data['city'] ?? '')), 'rating'=>$rating, 'text'=>$text, 'status'=>'pending', 'createdAt'=>$createdAt]]);

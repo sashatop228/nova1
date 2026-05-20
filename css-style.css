@@ -1060,11 +1060,23 @@ html[data-theme='light']{
   color:var(--muted2);
   font-size:15px;
 }
+.account-top-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  flex-wrap:wrap;
+}
 .account-cta{
   min-width:190px;
   border-radius:999px;
   padding:14px 18px;
   background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+}
+.account-logout-top{
+  min-width:112px;
+  border-radius:999px;
+  padding:14px 18px;
 }
 .account-grid{
   display:grid;
@@ -1192,6 +1204,7 @@ html[data-theme='light']{
   .account-login-layout,
   .account-history-grid{grid-template-columns:1fr}
   .account-topline{flex-direction:column; align-items:flex-start}
+  .account-top-actions{width:100%; justify-content:flex-start}
   .account-title{font-size:34px}
   .account-order-id{font-size:24px}
   .account-order-total strong{font-size:24px}
@@ -1287,10 +1300,265 @@ html[data-theme='light']{
   .pay-actions .btn{width:100%}
   .account-title{font-size:30px}
   .account-cta{width:100%; min-width:0; text-align:center; justify-content:center}
+  .account-logout-top{width:100%; justify-content:center}
   .account-box{min-height:unset; border-radius:20px}
   .account-order-top, .account-order-total{flex-direction:column; align-items:flex-start}
   .account-order-actions .btn{width:100%}
   .footer{padding:20px 0 26px}
+}
+
+.chatbot-root{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:80;
+  display:grid;
+  justify-items:end;
+  gap:12px;
+}
+.chatbot-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  border:none;
+  background:transparent;
+  box-shadow:none;
+  cursor:pointer;
+}
+.chatbot-toggle:hover{
+  transform:translateY(-2px) scale(1.02);
+}
+.chatbot-toggle img{
+  width:78px;
+  height:auto;
+  display:block;
+  filter:drop-shadow(0 10px 18px rgba(10,18,35,.22));
+}
+.chatbot-widget{
+  width:min(410px, calc(100vw - 24px));
+  border-radius:28px;
+  border:1px solid rgba(255,255,255,.10);
+  background:linear-gradient(180deg, rgba(9,17,30,.98), rgba(14,23,38,.96));
+  backdrop-filter:blur(18px);
+  box-shadow:0 28px 54px rgba(2,8,20,.38);
+  overflow:hidden;
+}
+.chatbot-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  padding:16px 16px 12px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.chatbot-head-main{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.chatbot-head-icon{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+  flex:0 0 auto;
+}
+.chatbot-head-icon img{
+  width:44px;
+  height:auto;
+  object-fit:contain;
+  display:block;
+}
+.chatbot-head h3{
+  margin:0;
+  font-size:18px;
+}
+.chatbot-head p{
+  margin:6px 0 0;
+  color:var(--muted2);
+  font-size:13px;
+  max-width:250px;
+}
+.chatbot-close{
+  width:40px;
+  height:40px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.05);
+  color:var(--text);
+  cursor:pointer;
+}
+.chatbot-messages{
+  display:grid;
+  gap:12px;
+  max-height:380px;
+  overflow:auto;
+  padding:14px 16px;
+}
+.chatbot-message{
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+}
+.chatbot-message.is-user{
+  justify-content:flex-end;
+}
+.chatbot-avatar{
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+  flex:0 0 auto;
+}
+.chatbot-avatar img{
+  width:28px;
+  height:auto;
+  object-fit:contain;
+  display:block;
+}
+.chatbot-bubble-wrap{
+  max-width:86%;
+}
+.chatbot-bubble{
+  padding:13px 15px;
+  border-radius:19px 19px 19px 8px;
+  line-height:1.55;
+  font-size:14px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.06);
+}
+.chatbot-message.is-user .chatbot-bubble{
+  border-radius:19px 19px 8px 19px;
+  background:linear-gradient(135deg, rgba(64,174,255,.22), rgba(58,233,202,.12));
+  border-color:rgba(95,172,255,.28);
+}
+.chatbot-suggestions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  padding:0 16px 12px;
+}
+.chatbot-chip{
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  border-radius:999px;
+  padding:9px 12px;
+  font-size:12px;
+  cursor:pointer;
+  transition:transform .18s ease, border-color .18s ease;
+}
+.chatbot-chip:hover{
+  transform:translateY(-1px);
+  border-color:rgba(95,172,255,.28);
+}
+.chatbot-form{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  padding:0 16px 16px;
+}
+.chatbot-input-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:54px;
+  padding:0 14px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.10);
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+.chatbot-input-icon{
+  color:#7ed5ff;
+  font-size:18px;
+  line-height:1;
+  flex:0 0 auto;
+}
+.chatbot-form input{
+  min-height:48px;
+  flex:1 1 auto;
+  border:none;
+  outline:none;
+  background:transparent;
+  color:var(--text);
+  font-size:14px;
+}
+.chatbot-form input::placeholder{
+  color:rgba(220,231,250,.56);
+}
+.chatbot-send{
+  width:54px;
+  min-width:54px;
+  height:54px;
+  border:none;
+  border-radius:18px;
+  background:linear-gradient(135deg, #2eb6ff, #1666ff);
+  color:#fff;
+  font-size:18px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 16px 28px rgba(19,90,225,.28);
+}
+:root[data-theme='light'] .return-reason-field select.return-select,
+:root[data-theme='light'] .return-reason-field select.return-select option{
+  background:#ffffff;
+  color:#182033;
+}
+:root[data-theme='light'] .status-pill{
+  border-color:rgba(24,32,51,.10);
+  background:#f6f8fc;
+}
+:root[data-theme='light'] .chatbot-widget{
+  background:rgba(255,255,255,.98);
+  border-color:rgba(24,32,51,.10);
+}
+:root[data-theme='light'] .chatbot-close,
+:root[data-theme='light'] .chatbot-bubble,
+:root[data-theme='light'] .chatbot-chip,
+:root[data-theme='light'] .chatbot-input-wrap{
+  background:#f6f8fc;
+  border-color:rgba(24,32,51,.10);
+  color:#182033;
+}
+:root[data-theme='light'] .chatbot-form input{
+  color:#182033;
+}
+:root[data-theme='light'] .chatbot-form input::placeholder{
+  color:#7a869d;
+}
+@media (max-width: 640px){
+  .chatbot-root{
+    right:12px;
+    bottom:12px;
+    left:12px;
+    justify-items:stretch;
+  }
+  .chatbot-widget{
+    width:100%;
+  }
+  .chatbot-toggle{
+    justify-content:flex-end;
+  }
+  .chatbot-toggle img{
+    width:72px;
+  }
+  .chatbot-head{
+    padding:14px 14px 10px;
+  }
+  .chatbot-head p{
+    max-width:none;
+  }
+  .chatbot-form{
+    grid-template-columns:1fr auto;
+  }
 }
 
 @media (max-width: 640px){
@@ -1519,4 +1787,189 @@ html[data-theme='light']{
   color:#d69f00;
   background:rgba(255,209,102,.22);
   border-color:rgba(214,159,0,.3);
+}
+
+
+/* ===== Админка, отзывы, возвраты ===== */
+.admin-login-note,
+.account-note,
+.review-helper,
+.return-helper{
+  margin-top:12px;
+  padding:14px 16px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);
+}
+.admin-credentials{
+  display:grid;
+  gap:6px;
+  margin-top:10px;
+  font-size:14px;
+}
+.admin-dashboard-grid,
+.admin-sections,
+.admin-stats{
+  display:grid;
+  gap:14px;
+}
+.admin-stats{
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+}
+.admin-stat{
+  padding:16px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);
+  display:grid;
+  gap:6px;
+}
+.admin-stat b{
+  font-size:28px;
+  line-height:1;
+}
+.admin-card{
+  display:grid;
+  gap:10px;
+}
+.admin-card-list,
+.admin-queue-list,
+.admin-orders-list,
+.product-reviews-grid{
+  display:grid;
+  gap:12px;
+}
+.admin-stock-controls{
+  display:grid;
+  gap:10px;
+}
+.admin-stock-form{
+  display:grid;
+  grid-template-columns:minmax(90px, 120px) repeat(2, auto);
+  gap:8px;
+  align-items:center;
+}
+.account-order-line-extended,
+.order-item-extended{
+  display:grid;
+  gap:8px;
+  padding:10px 0;
+}
+.account-line-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:6px;
+}
+.review-toolbar,
+.return-toolbar{
+  display:grid;
+  gap:10px;
+  margin-bottom:14px;
+}
+.reviews-empty,
+.queue-empty{
+  padding:18px;
+  border-radius:18px;
+  border:1px dashed rgba(255,255,255,.18);
+  background:rgba(255,255,255,.02);
+}
+.product-review-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+@media (max-width: 980px){
+  .admin-stats{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px){
+  .admin-stats{ grid-template-columns:1fr; }
+  .admin-stock-form{ grid-template-columns:1fr; }
+}
+
+
+
+.return-reason-field select.return-select{
+  color:var(--text);
+  background:#10182b;
+  font-weight:600;
+  -webkit-appearance:none;
+  appearance:none;
+  background-image:linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:calc(100% - 18px) calc(50% - 3px), calc(100% - 12px) calc(50% - 3px);
+  background-size:6px 6px, 6px 6px;
+  background-repeat:no-repeat;
+  padding-right:34px;
+}
+.return-reason-field select.return-select:focus{
+  border-color:rgba(124,92,255,.38);
+  box-shadow:0 0 0 3px rgba(124,92,255,.14);
+}
+.return-status-list{
+  display:grid;
+  gap:12px;
+}
+.return-status-card{
+  display:grid;
+  gap:8px;
+}
+.status-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  line-height:1.2;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);
+}
+.status-pill.is-new{
+  color:#9fd4ff;
+  background:rgba(61,146,255,.12);
+  border-color:rgba(61,146,255,.28);
+}
+.status-pill.is-progress{
+  color:#ffd57a;
+  background:rgba(255,184,77,.14);
+  border-color:rgba(255,184,77,.28);
+}
+.status-pill.is-approved{
+  color:#8ff0c2;
+  background:rgba(46,204,113,.14);
+  border-color:rgba(46,204,113,.28);
+}
+.status-pill.is-rejected{
+  color:#ffb0b0;
+  background:rgba(255,99,132,.14);
+  border-color:rgba(255,99,132,.28);
+}
+
+@media (max-width: 640px){
+  .chatbot-root{
+    right:12px;
+    bottom:12px;
+    left:12px;
+    justify-items:stretch;
+  }
+  .chatbot-widget{
+    width:100%;
+  }
+  .chatbot-toggle{
+    justify-content:flex-end;
+  }
+  .chatbot-toggle img{
+    width:70px;
+  }
+  .chatbot-head{
+    padding:14px 14px 10px;
+  }
+  .chatbot-head p{
+    max-width:none;
+  }
+  .chatbot-form{
+    grid-template-columns:1fr auto;
+  }
 }
