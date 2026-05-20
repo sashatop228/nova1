@@ -1,88 +1,70 @@
-CREATE DATABASE IF NOT EXISTS nova_shop CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE nova_shop;
+-- 1. Обновляем email администратора на корректный (с @)
+UPDATE users SET email = 'admin@example.com' WHERE email = 'admin';
 
-CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(120) NOT NULL,
-    email VARCHAR(190) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    role ENUM('admin','customer') NOT NULL DEFAULT 'customer',
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Если записи с email='admin' нет, ничего страшного — просто добавим администратора, если его нет
+INSERT IGNORE INTO users (name, email, password_hash, role, created_at)
+VALUES ('Администратор', 'admin@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', NOW());
 
-CREATE TABLE IF NOT EXISTS products (
-    id VARCHAR(120) PRIMARY KEY,
-    image VARCHAR(255) NOT NULL,
-    title VARCHAR(255) NOT NULL,
-    category VARCHAR(120) NOT NULL,
-    price INT NOT NULL DEFAULT 0,
-    old_price INT NOT NULL DEFAULT 0,
-    tags_json TEXT NULL,
-    material VARCHAR(120) NOT NULL DEFAULT 'Не указан',
-    color VARCHAR(120) NOT NULL DEFAULT 'Не указан',
-    in_stock TINYINT(1) NOT NULL DEFAULT 1,
-    stock_count INT NOT NULL DEFAULT 0,
-    delivery_days INT NOT NULL DEFAULT 3,
-    size_text VARCHAR(120) NOT NULL DEFAULT '—',
-    description_text TEXT NULL,
-    created_by_admin TINYINT(1) NOT NULL DEFAULT 0,
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- 2. Добавляем обычного пользователя (пароль = 'password')
+INSERT INTO users (name, email, password_hash, role, created_at)
+VALUES ('Иван Петров', 'ivan@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'customer', NOW());
 
-CREATE TABLE IF NOT EXISTS orders (
-    id VARCHAR(80) PRIMARY KEY,
-    user_id INT NOT NULL,
-    user_email VARCHAR(190) NOT NULL,
-    user_name VARCHAR(120) NOT NULL,
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    payment_method VARCHAR(40) NOT NULL DEFAULT 'card',
-    payment_label VARCHAR(120) NOT NULL DEFAULT 'Картой',
-    delivery_place VARCHAR(255) NULL,
-    subtotal INT NOT NULL DEFAULT 0,
-    delivery INT NOT NULL DEFAULT 0,
-    discount_amount INT NOT NULL DEFAULT 0,
-    total INT NOT NULL DEFAULT 0,
-    CONSTRAINT fk_orders_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- 3. Добавляем несколько товаров (id вручную, чтобы легко ссылаться)
+INSERT INTO products (id, image, title, category, price, old_price, tags_json, material, color, in_stock, stock_count, delivery_days, size_text, description_text, created_by_admin, created_at) VALUES
+('prod_1', 'https://via.placeholder.com/300', 'Ноутбук UltraBook', 'Электроника', 120000, 140000, '["ноутбук","ultrabook"]', 'Алюминий', 'Серебристый', 1, 5, 3, '15.6"', 'Мощный ноутбук для работы и учёбы.', 1, NOW()),
+('prod_2', 'https://via.placeholder.com/300', 'Беспроводная мышь', 'Аксессуары', 2500, 3000, '["мышь","беспроводная"]', 'Пластик', 'Чёрный', 1, 20, 2, '—', 'Эргономичная мышь с тихими кнопками.', 1, NOW()),
+('prod_3', 'https://via.placeholder.com/300', 'Клавиатура Mechanical', 'Аксессуары', 8500, 9990, '["клавиатура","механическая"]', 'Алюминий/пластик', 'Чёрный/красный', 1, 8, 3, '87 клавиш', 'Механическая клавиатура с подсветкой.', 1, NOW());
 
-CREATE TABLE IF NOT EXISTS order_items (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id VARCHAR(80) NOT NULL,
-    product_id VARCHAR(120) NOT NULL,
-    qty INT NOT NULL DEFAULT 1,
-    price INT NOT NULL DEFAULT 0,
-    CONSTRAINT fk_order_items_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
-    CONSTRAINT fk_order_items_product FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- 4. Добавляем заказ от пользователя Иван Петров (id заказа: ord_1)
+INSERT INTO orders (id, user_id, user_email, user_name, created_at, payment_method, payment_label, delivery_place, subtotal, delivery, discount_amount, total)
+VALUES (
+    'ord_1',
+    (SELECT id FROM users WHERE email = 'ivan@example.com'),
+    'ivan@example.com',
+    'Иван Петров',
+    NOW(),
+    'card',
+    'Картой онлайн',
+    'Москва, ул. Тверская, д. 1',
+    130500,
+    500,
+    0,
+    131000
+);
 
-CREATE TABLE IF NOT EXISTS reviews (
-    id VARCHAR(80) PRIMARY KEY,
-    order_id VARCHAR(80) NOT NULL,
-    product_id VARCHAR(120) NOT NULL,
-    product_title VARCHAR(255) NOT NULL,
-    user_email VARCHAR(190) NOT NULL,
-    user_name VARCHAR(120) NOT NULL,
-    city VARCHAR(120) NULL,
-    rating INT NOT NULL DEFAULT 5,
-    text_content TEXT NOT NULL,
-    status ENUM('pending','approved','rejected') NOT NULL DEFAULT 'pending',
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_reviews_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
-    CONSTRAINT fk_reviews_product FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- 5. Добавляем позиции заказа
+INSERT INTO order_items (order_id, product_id, qty, price) VALUES
+('ord_1', 'prod_1', 1, 120000),
+('ord_1', 'prod_2', 2, 2500);
 
-CREATE TABLE IF NOT EXISTS return_requests (
-    id VARCHAR(80) PRIMARY KEY,
-    order_id VARCHAR(80) NOT NULL,
-    product_id VARCHAR(120) NOT NULL,
-    product_title VARCHAR(255) NOT NULL,
-    user_email VARCHAR(190) NOT NULL,
-    user_name VARCHAR(120) NOT NULL,
-    reason VARCHAR(120) NOT NULL DEFAULT 'Брак',
-    comment_text TEXT NOT NULL,
-    contact VARCHAR(255) NULL,
-    status ENUM('new','in_progress','approved','rejected') NOT NULL DEFAULT 'new',
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_returns_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
-    CONSTRAINT fk_returns_product FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- 6. Добавляем одобренный отзыв от Ивана на товар prod_1
+INSERT INTO reviews (id, order_id, product_id, product_title, user_email, user_name, city, rating, text_content, status, created_at)
+VALUES (
+    'rev_1',
+    'ord_1',
+    'prod_1',
+    'Ноутбук UltraBook',
+    'ivan@example.com',
+    'Иван Петров',
+    'Москва',
+    5,
+    'Отличный ноутбук, быстрый и лёгкий. Доставка вовремя.',
+    'approved',
+    NOW()
+);
+
+-- 7. Добавляем запрос на возврат (статус new) для мыши
+INSERT INTO return_requests (id, order_id, product_id, product_title, user_email, user_name, reason, comment_text, contact, status, created_at)
+VALUES (
+    'return_1',
+    'ord_1',
+    'prod_2',
+    'Беспроводная мышь',
+    'ivan@example.com',
+    'Иван Петров',
+    'Не подошёл размер',
+    'Мышь слишком маленькая для моей руки.',
+    '+7 123 456-78-90',
+    'new',
+    NOW()
+);
