@@ -57,7 +57,7 @@ function ensure_seed(PDO $pdo): void {
     $stmt->execute(['admin']);
     if (!$stmt->fetch()) {
         $stmt = $pdo->prepare('INSERT INTO users (name, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?)');
-        $stmt->execute(['Администратор', 'admin', password_hash('admin', PASSWORD_DEFAULT), 'admin', date('Y-m-d H:i:s')]);
+        $stmt->execute(['Администратор', 'admin@example.com', password_hash('admin', PASSWORD_DEFAULT), 'admin', date('Y-m-d H:i:s')]);
     }
 
     $count = (int)$pdo->query('SELECT COUNT(*) FROM products')->fetchColumn();
