@@ -1,0 +1,456 @@
+(function(){
+  const products = [
+    {
+          id: "sofa-aurora",
+          image: "assets/img/products/divan2.png",
+          title: "Диван «Aurora»",
+          category: "Диваны",
+          price: 69990,
+          oldPrice: 79990,
+    tags: ["Хит", "Сканди", "Ткань"],
+          material: "Ткань",
+          color: "Серый",
+          inStock: true,
+          stockCount: 5,
+          deliveryDays: 3,
+          size: "220×95×85",
+          description:
+            "Мягкий диван с высокой посадкой и упругими подушками. Идеален для гостиной, легко впишется в современный интерьер."
+        },
+    {
+          id: "sofa-nova",
+          image: "assets/img/products/ugl-divan.jpg",
+          title: "Угловой диван «Nova»",
+          category: "Диваны",
+          price: 99990,
+          oldPrice: 112990,
+    tags: ["Угловой", "Премиум"],
+          material: "Велюр",
+          color: "Бежевый",
+          inStock: true,
+          stockCount: 3,
+          deliveryDays: 5,
+          size: "260×160×86",
+          description:
+            "Угловая модель с просторной посадкой и фактурной тканью. Комфорт на каждый день и для гостей."
+        },
+    {
+          id: "bed-moon",
+          image: "assets/img/products/krovat2.jpg",
+          title: "Кровать «Moon» 160×200",
+          category: "Кровати",
+          price: 52990,
+          oldPrice: 59990,
+    tags: ["Новинка", "Мягкое изголовье"],
+          material: "Ткань",
+          color: "Графит",
+          inStock: true,
+          stockCount: 4,
+          deliveryDays: 4,
+          size: "175×215×110",
+          description:
+            "Кровать с мягким изголовьем и устойчивой геометрией. Отлично смотрится в минималистичном стиле."
+        },
+    {
+          id: "bed-lume",
+          image: "assets/img/products/krovat5.jpg",
+          title: "Кровать «Lume» 180×200",
+          category: "Кровати",
+          price: 64990,
+          oldPrice: 0,
+    tags: ["Лаконично", "Дерево"],
+          material: "Массив/шпон",
+          color: "Орех",
+          inStock: true,
+          stockCount: 2,
+          deliveryDays: 6,
+          size: "195×220×100",
+          description:
+            "Тёплая текстура дерева, строгие линии и надёжная конструкция. Для тех, кто любит натуральные материалы."
+        },
+    {
+          id: "table-zen",
+          image: "assets/img/products/obed-stol3.jpg",
+          title: "Обеденный стол «Zen»",
+          category: "Столы",
+          price: 37990,
+          oldPrice: 42990,
+    tags: ["Эко", "Массив"],
+          material: "Массив",
+          color: "Натуральный",
+          inStock: true,
+          stockCount: 6,
+          deliveryDays: 3,
+          size: "140×80×75",
+          description:
+            "Компактный стол для кухни и столовой. Приятная текстура и стабильные опоры."
+        },
+    {
+          id: "table-orbit",
+          image: "assets/img/products/gur-stol2.jpg",
+          title: "Журнальный стол «Orbit»",
+          category: "Столы",
+          price: 14990,
+          oldPrice: 17990,
+      tags: ["Лофт", "Металл"],
+          material: "Металл/ЛДСП",
+          color: "Чёрный",
+          inStock: true,
+          stockCount: 8,
+          deliveryDays: 2,
+          size: "80×80×40",
+          description:
+            "Лёгкий и стильный столик для гостиной — отлично сочетается с диваном и креслом."
+        },
+    {
+          id: "chair-milo",
+          image: "assets/img/products/stul3.jpg",
+          title: "Стул «Milo»",
+          category: "Стулья",
+          price: 8990,
+          oldPrice: 9990,
+    tags: ["Удобный", "Хит"],
+          material: "Ткань/металл",
+          color: "Синий",
+          inStock: true,
+          stockCount: 12,
+          deliveryDays: 2,
+          size: "48×52×84",
+          description:
+            "Эргономичная форма и мягкая посадка. Подходит для кухни, рабочего места и кафе-зоны."
+        },
+    {
+          id: "chair-silk",
+          image: "assets/img/products/kreslo.jpg",
+          title: "Кресло «Silk»",
+          category: "Кресла",
+          price: 28990,
+          oldPrice: 32990,
+    tags: ["Комфорт", "Велюр"],
+          material: "Велюр",
+          color: "Зелёный",
+          inStock: true,
+          stockCount: 4,
+          deliveryDays: 4,
+          size: "75×78×92",
+          description:
+            "Мягкое кресло с поддержкой спины. Идеально для чтения, отдыха и уютных вечеров."
+        },
+    {
+          id: "wardrobe-line",
+          image: "assets/img/products/shkaf2.jpg",
+          title: "Шкаф «Line» 3-дверный",
+          category: "Шкафы",
+          price: 57990,
+          oldPrice: 0,
+    tags: ["Вместительный"],
+          material: "ЛДСП",
+          color: "Белый",
+          inStock: true,
+          stockCount: 3,
+          deliveryDays: 7,
+          size: "150×60×210",
+          description:
+            "Вместительный шкаф с лаконичным фасадом. Подходит для спальни и гардеробной зоны."
+        },
+    {
+          id: "dresser-fine",
+          image: "assets/img/products/komod2.jpg",
+          title: "Комод «Fine»",
+          category: "Комоды",
+          price: 24990,
+          oldPrice: 27990,
+    tags: ["Минимализм"],
+          material: "МДФ/ЛДСП",
+          color: "Дуб",
+          inStock: true,
+          stockCount: 7,
+          deliveryDays: 5,
+          size: "120×42×82",
+          description:
+            "Компактный комод с плавными фасадами. Идеален для хранения вещей в спальне и прихожей."
+        },
+    {
+          id: "sofa-neo",
+          image: "assets/img/products/divan3.png",
+          title: "Диван «Neo»",
+          category: "Диваны",
+          price: 74990,
+          oldPrice: 0,
+          tags: ["Новый", "Ткань"],
+          material: "Ткань",
+          color: "Синий",
+          inStock: true,
+          stockCount: 4,
+          deliveryDays: 4,
+          size: "230×98×86",
+          description: "Прямой диван с плотной посадкой и мягкими подлокотниками. Хорош для ежедневного отдыха."
+        },
+    {
+          id: "sofa-cloud",
+          image: "assets/img/products/divan4.png",
+          title: "Диван «Cloud»",
+          category: "Диваны",
+          price: 82990,
+          oldPrice: 89990,
+          tags: ["Комфорт", "Хит"],
+          material: "Велюр",
+          color: "Светло-серый",
+          inStock: true,
+          stockCount: 2,
+          deliveryDays: 5,
+          size: "240×100×88",
+          description: "Уютная модель с объёмными подушками и приятной фактурой. Легко вписывается в современный интерьер."
+        },
+    {
+          id: "sofa-corner-orion",
+          image: "assets/img/products/ugl-divan2.jpg",
+          title: "Угловой диван «Orion»",
+          category: "Диваны",
+          price: 109990,
+          oldPrice: 0,
+          tags: ["Угловой"],
+          material: "Велюр",
+          color: "Графит",
+          inStock: false,
+          stockCount: 0,
+          deliveryDays: 10,
+          size: "275×170×86",
+          description: "Практичный угловой диван с большим посадочным местом. Доступен под заказ в нескольких оттенках."
+        },
+    {
+          id: "bed-luna",
+          image: "assets/img/products/krovat.jpg",
+          title: "Кровать «Luna» 140×200",
+          category: "Кровати",
+          price: 47990,
+          oldPrice: 0,
+          tags: ["Мягкое изголовье"],
+          material: "Ткань",
+          color: "Бежевый",
+          inStock: true,
+          stockCount: 5,
+          deliveryDays: 4,
+          size: "155×215×108",
+          description: "Кровать с мягким изголовьем и аккуратной геометрией. Хороший выбор для компактной спальни."
+        },
+    {
+          id: "bed-stella",
+          image: "assets/img/products/krovat4.jpg",
+          title: "Кровать «Stella» 160×200",
+          category: "Кровати",
+          price: 58990,
+          oldPrice: 64990,
+          tags: ["Новинка"],
+          material: "Ткань",
+          color: "Песочный",
+          inStock: true,
+          stockCount: 3,
+          deliveryDays: 6,
+          size: "175×215×112",
+          description: "Сбалансированная модель с устойчивым основанием и выразительным изголовьем."
+        },
+    {
+          id: "table-oak-120",
+          image: "assets/img/products/obed-stol.jpg",
+          title: "Обеденный стол «Oak» 120",
+          category: "Столы",
+          price: 21990,
+          oldPrice: 0,
+          tags: ["Дерево"],
+          material: "Массив/шпон",
+          color: "Дуб",
+          inStock: true,
+          stockCount: 6,
+          deliveryDays: 3,
+          size: "120×80×75",
+          description: "Компактный обеденный стол на 4–6 персон. Тёплый оттенок дуба и надёжные опоры."
+        },
+    {
+          id: "table-oak-160",
+          image: "assets/img/products/obed-stol2.jpg",
+          title: "Обеденный стол «Oak» 160",
+          category: "Столы",
+          price: 28990,
+          oldPrice: 31990,
+          tags: ["Для семьи"],
+          material: "Массив/шпон",
+          color: "Дуб",
+          inStock: true,
+          stockCount: 2,
+          deliveryDays: 4,
+          size: "160×90×75",
+          description: "Увеличенная версия стола «Oak» для просторной кухни или гостиной."
+        },
+    {
+          id: "desk-atelier",
+          image: "assets/img/products/pism-stol.jpg",
+          title: "Письменный стол «Atelier»",
+          category: "Столы",
+          price: 19990,
+          oldPrice: 0,
+          tags: ["Рабочее место"],
+          material: "ЛДСП/металл",
+          color: "Чёрный/дуб",
+          inStock: true,
+          deliveryDays: 5,
+          size: "120×60×75",
+          description: "Лаконичный письменный стол с металлическим каркасом. Подойдёт для домашнего офиса."
+        },
+    {
+          id: "chair-soft-1",
+          image: "assets/img/products/stul.jpg",
+          title: "Стул «Soft» (комплект 2 шт.)",
+          category: "Стулья",
+          price: 15990,
+          oldPrice: 0,
+          tags: ["Комплект"],
+          material: "Ткань/металл",
+          color: "Серый",
+          inStock: true,
+          deliveryDays: 3,
+          size: "—",
+          description: "Два удобных стула с мягким сиденьем. Отлично сочетаются с обеденными столами."
+        },
+    {
+          id: "chair-easy",
+          image: "assets/img/products/stul2.jpg",
+          title: "Стул «Easy»",
+          category: "Стулья",
+          price: 6990,
+          oldPrice: 0,
+          tags: ["Минимализм"],
+          material: "Пластик/металл",
+          color: "Белый",
+          inStock: true,
+          deliveryDays: 2,
+          size: "—",
+          description: "Лёгкий и практичный стул для кухни и кафе. Легко чистится и не боится влаги."
+        },
+    {
+          id: "armchair-cozy",
+          image: "assets/img/products/kreslo2.jpg",
+          title: "Кресло «Cozy»",
+          category: "Кресла",
+          price: 23990,
+          oldPrice: 26990,
+          tags: ["Уют"],
+          material: "Велюр",
+          color: "Зелёный",
+          inStock: true,
+          deliveryDays: 5,
+          size: "78×78×92",
+          description: "Мягкое кресло для чтения и отдыха. Комфортная посадка и плавные формы."
+        },
+    {
+          id: "armchair-mono",
+          image: "assets/img/products/kreslo3.jpg",
+          title: "Кресло «Mono»",
+          category: "Кресла",
+          price: 19990,
+          oldPrice: 0,
+          tags: ["Сканди"],
+          material: "Ткань",
+          color: "Светло-серый",
+          inStock: false,
+          deliveryDays: 9,
+          size: "75×80×90",
+          description: "Лаконичное кресло с деревянными ножками. Доступно под заказ."
+        },
+    {
+          id: "wardrobe-slim",
+          image: "assets/img/products/shkaf.jpg",
+          title: "Шкаф «Slim» 2-дверный",
+          category: "Шкафы",
+          price: 39990,
+          oldPrice: 0,
+          tags: ["Компактный"],
+          material: "ЛДСП",
+          color: "Дуб",
+          inStock: true,
+          stockCount: 5,
+          deliveryDays: 6,
+          size: "100×55×210",
+          description: "Узкий шкаф для небольших комнат и прихожих. Внутри полки и штанга."
+        },
+    {
+          id: "wardrobe-gloss",
+          image: "assets/img/products/shkaf3.jpg",
+          title: "Шкаф «Gloss» 3-дверный",
+          category: "Шкафы",
+          price: 62990,
+          oldPrice: 69990,
+          tags: ["Глянец"],
+          material: "МДФ/ЛДСП",
+          color: "Белый",
+          inStock: true,
+          stockCount: 2,
+          deliveryDays: 8,
+          size: "160×60×210",
+          description: "Шкаф с гладкими фасадами и современным видом. Отлично смотрится в светлых интерьерах."
+        },
+    {
+          id: "dresser-nord",
+          image: "assets/img/products/komod.jpg",
+          title: "Комод «Nord»",
+          category: "Комоды",
+          price: 21990,
+          oldPrice: 0,
+          tags: ["Сканди"],
+          material: "МДФ/ЛДСП",
+          color: "Белый/дуб",
+          inStock: true,
+          stockCount: 6,
+          deliveryDays: 4,
+          size: "110×42×78",
+          description: "Комод с удобными ящиками и аккуратными ручками. Подходит для спальни и гостиной."
+        },
+    {
+          id: "dresser-wide",
+          image: "assets/img/products/komod3.jpg",
+          title: "Комод «Wide»",
+          category: "Комоды",
+          price: 27990,
+          oldPrice: 30990,
+          tags: ["Вместительный"],
+          material: "ЛДСП",
+          color: "Графит",
+          inStock: true,
+          stockCount: 4,
+          deliveryDays: 5,
+          size: "140×45×82",
+          description: "Широкий комод для хранения одежды и аксессуаров. Сдержанный современный дизайн."
+        }
+  ];
+
+  const categories = [
+    "Диваны", "Кровати", "Столы", "Стулья", "Кресла", "Шкафы", "Комоды"
+  ];
+
+  function resolveAsset(path){
+
+    try{
+      if(!path) return "";
+
+      if(/^(https?:|data:|blob:)/i.test(path)) return path;
+
+      if(path.startsWith("/")) return new URL(path, window.location.origin).href;
+
+      const base = document.baseURI || window.location.href;
+      return new URL(path.replace(/^\.\//,''), base).href;
+    }catch(e){
+      return path;
+    }
+  }
+
+
+  products.forEach(p => {
+    p.image = resolveAsset(p.image);
+  });
+
+  window.Data = {
+    products,
+    categories,
+    resolveAsset
+  };
+})();

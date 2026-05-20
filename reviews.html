@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Отзывы — НОВА - Мебель</title>
+  <link rel="stylesheet" href="css-style.css" />
+  <noscript><style>body{visibility:visible!important}</style></noscript>
+  <style id="anti-flicker-inline">html:not(.app-ready) body{visibility:hidden}html.app-ready body{visibility:visible}</style>
+  <style>html{background:#070A12}</style>
+</head>
+<body>
+<main class="container">
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h3>Отзывы покупателей</h3>
+        <p>Здесь собраны уже опубликованные отзывы о магазине «Нова» и форма для отправки нового отзыва.</p>
+      </div>
+      <a class="btn" href="catalog.html">Перейти в каталог</a>
+    </div>
+
+    <div class="reviews-grid">
+      <article class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>Заказывали угловой диван для гостиной. Доставили аккуратно, собрали в тот же день, ткань выглядит даже лучше, чем на фото.</p>
+        <div class="author">Марина</div>
+        <div class="meta">Киров</div>
+      </article>
+      <article class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>Понравилось, что менеджер помог подобрать стол под размеры кухни. Всё пришло вовремя, упаковка была надёжная.</p>
+        <div class="author">Илья</div>
+        <div class="meta">Яранск</div>
+      </article>
+      <article class="review-card">
+        <div class="stars">★★★★☆</div>
+        <p>Брали кровать и две тумбы. Сервис вежливый, сборка быстрая. Отдельный плюс за понятные ответы по срокам доставки.</p>
+        <div class="author">Светлана</div>
+        <div class="meta">Котельнич</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="panel">
+      <h4 style="margin-bottom:12px">Оставить отзыв</h4>
+      <form class="review-form" id="reviewForm">
+        <div class="field">
+          <label for="review-name">Ваше имя</label>
+          <input id="review-name" type="text" placeholder="Например, Анна" required />
+        </div>
+        <div class="field">
+          <label for="review-city">Город</label>
+          <input id="review-city" type="text" placeholder="Например, Киров" />
+        </div>
+        <div class="field full">
+          <label>Оценка</label>
+          <div class="rating-stars" id="ratingStars" role="radiogroup" aria-label="Оценка в звездах">
+            <button type="button" class="rating-star active" data-rating="1" aria-label="1 звезда">★</button>
+            <button type="button" class="rating-star active" data-rating="2" aria-label="2 звезды">★</button>
+            <button type="button" class="rating-star active" data-rating="3" aria-label="3 звезды">★</button>
+            <button type="button" class="rating-star active" data-rating="4" aria-label="4 звезды">★</button>
+            <button type="button" class="rating-star active" data-rating="5" aria-label="5 звёзд">★</button>
+          </div>
+          <input id="review-rating" type="hidden" value="5" />
+        </div>
+        <div class="field" style="grid-column:1/-1">
+          <label for="review-text">Текст отзыва</label>
+          <textarea id="review-text" rows="5" placeholder="Расскажите о покупке, доставке и впечатлениях" required></textarea>
+        </div>
+        <div style="grid-column:1/-1; display:flex; gap:10px; flex-wrap:wrap">
+          <button class="btn primary" type="submit">Отправить отзыв</button>
+          <span class="small">После отправки отзыв попадёт на модерацию.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+<script src="js-data.js"></script>
+<script src="js-common.js"></script>
+<script src="js-page-reviews.js"></script>
+</body>
+</html>

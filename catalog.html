@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Каталог — НОВА - Мебель</title>
+  <link rel="stylesheet" href="css-style.css" />
+  <noscript><style>body{visibility:visible!important}</style></noscript>
+  <style id="anti-flicker-inline">html:not(.app-ready) body{visibility:hidden}html.app-ready body{visibility:visible}</style>
+
+
+  <style>html{background:#070A12}</style>
+</head>
+<body>
+
+<main class="container">
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h3>Каталог мебели</h3>
+        <p>Выбирай мебель из каталога — карточки, сортировка и страницы сохранены.</p>
+      </div>
+      
+    </div>
+
+    <div class="catalog-layout">
+      <div class="filter-backdrop" id="filterBackdrop" hidden></div>
+      <aside class="panel filter-card" id="filters">
+        <h4 class="filter-title">Фильтр товаров</h4>
+        <div class="filter-grid">
+          <label>
+            <span>Поиск</span>
+            <input id="fQuery" type="text" placeholder="Название, материал, цвет" />
+          </label>
+          <label>
+            <span>Категория</span>
+            <select id="fCategory"></select>
+          </label>
+          <label>
+            <span>Материал</span>
+            <select id="fMaterial"></select>
+          </label>
+          <div class="filter-row">
+            <label>
+              <span>Цена от</span>
+              <input id="fMin" type="number" min="0" placeholder="0" />
+            </label>
+            <label>
+              <span>Цена до</span>
+              <input id="fMax" type="number" min="0" placeholder="999999" />
+            </label>
+          </div>
+          <label class="filter-check">
+            <input id="fStock" type="checkbox" />
+            <span>Только в наличии</span>
+          </label>
+          <div class="filter-actions">
+            <button class="btn primary" id="applyBtn" type="button">Применить</button>
+            <button class="btn" id="resetBtn" type="button">Сбросить</button>
+          </div>
+        </div>
+      </aside>
+
+      <section class="catalog-main">
+        <div class="toolbar">
+          <button class="btn filter-toggle" id="filterToggle" type="button" aria-expanded="false" aria-controls="filters">Фильтр товаров</button>
+          <div class="count" id="count"></div>
+          <div class="right">
+            <select id="sort" class="btn" aria-label="Сортировка">
+              <option value="popular">Сначала популярные</option>
+              <option value="price-asc">Сначала дешевле</option>
+              <option value="price-desc">Сначала дороже</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="cards" id="grid"></div>
+        <div class="pagination" id="pager"></div>
+      </section>
+    </div>
+  </section>
+</main>
+
+<script src="js-data.js"></script>
+<script src="js-common.js"></script>
+<script src="js-page-catalog.js"></script>
+</body>
+</html>

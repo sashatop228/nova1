@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Аккаунт — НОВА - Мебель</title>
+  <link rel="stylesheet" href="css-style.css" />
+  <noscript><style>body{visibility:visible!important}</style></noscript>
+  <style id="anti-flicker-inline">html:not(.app-ready) body{visibility:hidden}html.app-ready body{visibility:visible}</style>
+  <style>html{background:#070A12}</style>
+</head>
+<body>
+<main class="container">
+  <section class="section account-page">
+    <div id="accountGuest" class="account-auth-view">
+      <div class="account-shell">
+        <div class="account-topline">
+          <div>
+            <h2 class="account-title">Аккаунт</h2>
+            <p class="account-subtitle">Войдите, чтобы увидеть избранное, историю заказов и быстрый доступ к покупкам.</p>
+          </div>
+          <a class="btn account-cta" href="catalog.html">Перейти в каталог</a>
+        </div>
+
+        <div class="account-login-layout">
+          <div class="panel auth-panel auth-panel-main account-hero-panel">
+            <div class="account-panel-head">
+              <div>
+                <h3>Вход</h3>
+                <p class="muted">Сначала открывается страница входа. Если аккаунта ещё нет, ниже доступна отдельная страница регистрации.</p>
+              </div>
+            </div>
+            <form id="loginForm" class="form-grid auth-form" style="margin-top:16px">
+              <div class="field full">
+                <label for="loginEmail">Email</label>
+                <input id="loginEmail" type="email" placeholder="mail@example.com" required />
+              </div>
+              <div class="field full">
+                <label for="loginPassword">Пароль</label>
+                <input id="loginPassword" type="password" placeholder="Введите пароль" required />
+              </div>
+              <div class="field full"><button class="btn primary auth-submit" type="submit">Войти</button></div>
+            </form>
+          </div>
+
+          <div class="panel auth-panel auth-panel-secondary account-side-panel">
+            <h3>Нет аккаунта?</h3>
+            <p class="muted">Создайте новый профиль на отдельной странице регистрации, чтобы сохранять свои заказы.</p>
+            <a class="btn primary auth-submit" href="register.html" style="margin-top:12px">Регистрация</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="accountUser" class="hidden account-dashboard-view">
+      <div class="account-shell">
+        <div class="account-topline">
+          <div>
+            <h2 class="account-title">Аккаунт</h2>
+            <p id="accountMeta" class="account-subtitle">Избранное и последний заказ.</p>
+          </div>
+          <a class="btn account-cta" href="catalog.html">Добавить товары →</a>
+        </div>
+
+        <div class="account-grid">
+          <article class="panel account-box account-favorites">
+            <div class="account-box-head">
+              <h3>Избранное</h3>
+            </div>
+            <div class="account-empty-card">
+              <span id="favoritesText">В избранном пока пусто.</span>
+            </div>
+          </article>
+
+          <article class="panel account-box account-last-order">
+            <div class="account-box-head">
+              <h3>Последний заказ</h3>
+            </div>
+            <div id="lastOrderEmpty" class="account-order-empty hidden">
+              <p class="muted">У этого аккаунта пока нет оформленных заказов.</p>
+            </div>
+            <div id="lastOrderCard" class="account-order-card hidden">
+              <div class="account-order-top">
+                <div>
+                  <div id="lastOrderId" class="account-order-id"></div>
+                  <div id="lastOrderDate" class="account-order-date"></div>
+                </div>
+                <span class="pill small" id="lastOrderPayment">Оплата</span>
+              </div>
+              <div id="lastOrderItems" class="account-order-items"></div>
+              <div class="account-order-total">
+                <span>Итого</span>
+                <strong id="lastOrderTotal"></strong>
+              </div>
+              <div class="account-order-actions">
+                <a class="btn primary" href="catalog.html">Сделать новый заказ</a>
+                <button class="btn danger" id="logoutBtn" type="button">Выйти</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div id="ordersArchiveWrap" class="account-archive-wrap hidden">
+          <div class="account-box-head account-archive-head">
+            <div>
+              <h3>История заказов</h3>
+              <p class="muted">Все заказы этого аккаунта.</p>
+            </div>
+          </div>
+          <div id="ordersList" class="order-list account-history-grid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="js-data.js"></script>
+<script src="js-common.js"></script>
+<script src="js-page-account.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Товар — НОВА - Мебель</title>
+  <link rel="stylesheet" href="css-style.css" />
+  <noscript><style>body{visibility:visible!important}</style></noscript>
+  <style id="anti-flicker-inline">html:not(.app-ready) body{visibility:hidden}html.app-ready body{visibility:visible}</style>
+
+<style>
+    html{background:#070A12}
+  </style>
+</head>
+<body>
+
+<main class="container">
+  <section class="section">
+    <div class="pill small"><a href="catalog.html">Каталог</a> <span class="small">→</span> <span id="crumb">Товар</span></div>
+    <div class="hr"></div>
+
+    <div class="product">
+      <div class="gallery" id="gallery"></div>
+
+      <div class="info">
+        <h2 id="title"></h2>
+        <div class="meta" id="meta"></div>
+
+        <div class="price">
+          <b id="price"></b>
+          <s id="old"></s>
+          <span class="pill small" id="stock"></span>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap:10px">
+          <div class="notice">
+            <b>Размер</b><br/>
+            <span class="small" id="size"></span>
+          </div>
+          <div class="notice">
+            <b>Доставка</b><br/>
+            <span class="small" id="delivery"></span>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="small" id="desc"></div>
+
+        <div class="stock-note" id="stockCount"></div>
+
+        <div class="notice" style="margin-top:14px">
+          <b>Как заказать</b><br/>
+          <span class="small">Напишите нам — мы уточним наличие, цвет и сроки доставки.</span>
+          <div class="hr"></div>
+          <div class="actions" style="margin-top:10px">
+            <button class="btn primary small" type="button" id="addToCartBtn">Добавить в корзину</button>
+            <a class="btn small" href="contacts.html">Связаться с нами</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>Рекомендуем</h3>
+          <p>Похожие товары по стилю и категории.</p>
+        </div>
+        <a class="pill" href="catalog.html">Каталог →</a>
+      </div>
+      <div class="cards" id="reco"></div>
+    </section>
+  </section>
+</main>
+
+<script src="js-data.js"></script>
+<script src="js-common.js"></script>
+<script src="js-page-product.js"></script>
+</body>
+</html>

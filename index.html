@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>НОВА - Мебель</title>
+  <link rel="stylesheet" href="css-style.css" />
+  <noscript><style>body{visibility:visible!important}</style></noscript>
+  <style id="anti-flicker-inline">html:not(.app-ready) body{visibility:hidden}html.app-ready body{visibility:visible}</style>
+
+<style>
+    html{background:#070A12}
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="pill"><span class="small">Новый сезон • Скидки до 15%</span></div>
+          <h2>Мебель, которая делает дом стильным.</h2>
+          <p>
+            Подбирай диваны, кровати, столы и кресла в современном дизайне.
+            Выбирай модели, смотри характеристики и оформляй заказ через контакты.
+          </p>
+
+          <div class="cta">
+            <a class="btn primary" href="catalog.html">Открыть каталог</a>
+            <a class="btn" href="delivery.html">Доставка и сборка</a>
+            <a class="btn ghost" href="about.html">О компании</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat"><b>48–72ч</b><span>средняя доставка</span></div>
+            <div class="stat"><b>3 года</b><span>гарантия</span></div>
+            <div class="stat"><b>0 ₽</b><span>при заказе от 80 тыс</span></div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="content">
+            <h3>Подборка недели</h3>
+            <div class="small">Топ-модели: комфорт + дизайн.</div>
+            <div class="hr"></div>
+            <div class="grid" style="gap:10px" id="weekPicks"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>Хиты каталога</h3>
+          <p>Лаконичный стиль, премиальные материалы, честная цена.</p>
+        </div>
+        <a class="pill" href="catalog.html">Смотреть всё →</a>
+      </div>
+      <div class="cards" id="hitGrid"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>Почему выбирают «Нова»</h3>
+          <p>Прозрачные условия и приятный сервис.</p>
+        </div>
+      </div>
+
+      <div class="cards" style="grid-template-columns:repeat(4,1fr)">
+        <div class="card" style="padding:14px">
+          <div class="pill"> <span class="small">Сборка</span></div>
+          <h3 style="margin:10px 0 6px; font-size:15px">Сборка в день доставки</h3>
+          <div class="small">Аккуратно соберём и установим — без лишней суеты.</div>
+        </div>
+        <div class="card" style="padding:14px">
+          <div class="pill"> <span class="small">Упаковка</span></div>
+          <h3 style="margin:10px 0 6px; font-size:15px">Надёжная доставка</h3>
+          <div class="small">Упаковываем так, чтобы всё приехало идеально.</div>
+        </div>
+        <div class="card" style="padding:14px">
+          <div class="pill"> <span class="small">Поддержка</span></div>
+          <h3 style="margin:10px 0 6px; font-size:15px">Поможем выбрать</h3>
+          <div class="small">Подбор по размеру, материалам и цветам.</div>
+        </div>
+        <div class="card" style="padding:14px">
+          <div class="pill"> <span class="small">Гарантия</span></div>
+          <h3 style="margin:10px 0 6px; font-size:15px">Официальная гарантия</h3>
+          <div class="small">До 3 лет — на каркас и механизмы.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js-data.js"></script>
+    <script src="js-common.js"></script>
+      <script src="js-page-home.js"></script>
+</body>
+</html>

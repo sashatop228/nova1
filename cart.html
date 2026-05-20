@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Корзина — НОВА - Мебель</title>
+  <link rel="stylesheet" href="css-style.css" />
+  <noscript><style>body{visibility:visible!important}</style></noscript>
+  <style id="anti-flicker-inline">html:not(.app-ready) body{visibility:hidden}html.app-ready body{visibility:visible}</style>
+  <style>html{background:#070A12}</style>
+</head>
+<body>
+<main class="container">
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h3>Корзина</h3>
+        <p>Проверьте выбранные товары перед оформлением заявки.</p>
+      </div>
+      <a class="btn" href="catalog.html">Продолжить покупки</a>
+    </div>
+
+    <div class="two">
+      <div>
+        <div class="panel" id="cartEmpty" style="display:none">
+          <h4>Корзина пока пуста</h4>
+          <p class="muted">Добавьте товары из каталога или со страницы товара.</p>
+          <a class="btn primary" href="catalog.html">Открыть каталог</a>
+        </div>
+        <div class="panel" id="cartTableWrap">
+          <table class="table">
+            <tbody id="cartTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <aside class="summary">
+        <h4>Итого по заказу</h4>
+        <div class="line"><span>Товары</span><b id="sumCount">0</b></div>
+        <div class="line"><span>Сумма</span><b id="sumSubtotal">0 ₽</b></div>
+        <div class="line"><span>Доставка</span><b id="sumDelivery">0 ₽</b></div>
+        <div class="line total"><span>К оплате</span><b id="sumTotal">0 ₽</b></div>
+        <div class="hr"></div>
+        <button class="btn primary" id="checkoutBtn" type="button">Оформить заявку</button>
+        <button class="btn" id="clearCartBtn" type="button">Очистить корзину</button>
+      </aside>
+    </div>
+  </section>
+</main>
+<script src="js-data.js"></script>
+<script src="js-common.js"></script>
+<script src="js-page-cart.js"></script>
+</body>
+</html>

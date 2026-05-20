@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Регистрация — НОВА - Мебель</title>
+  <link rel="stylesheet" href="css-style.css" />
+  <noscript><style>body{visibility:visible!important}</style></noscript>
+  <style id="anti-flicker-inline">html:not(.app-ready) body{visibility:hidden}html.app-ready body{visibility:visible}</style>
+  <style>html{background:#070A12}</style>
+</head>
+<body>
+<main class="container">
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h3>Регистрация</h3>
+        <p>Создайте аккаунт, чтобы сохранять оформленные заказы в личном кабинете.</p>
+      </div>
+      <a class="btn" href="account.html">Назад ко входу</a>
+    </div>
+
+    <div id="registerGuest" class="auth-stack">
+      <div class="panel auth-panel auth-panel-main">
+        <h4>Создание аккаунта</h4>
+        <p class="muted">После регистрации вы автоматически войдёте в аккаунт и сможете просматривать историю заказов.</p>
+        <form id="registerForm" class="form-grid auth-form" style="margin-top:12px">
+          <div class="field full">
+            <label for="regName">Имя</label>
+            <input id="regName" type="text" placeholder="Ваше имя" required />
+          </div>
+          <div class="field full">
+            <label for="regEmail">Email</label>
+            <input id="regEmail" type="email" placeholder="mail@example.com" required />
+          </div>
+          <div class="field full">
+            <label for="regPassword">Пароль</label>
+            <input id="regPassword" type="password" placeholder="Придумайте пароль" required />
+          </div>
+          <div class="field full"><button class="btn primary auth-submit" type="submit">Зарегистрироваться</button></div>
+        </form>
+      </div>
+
+      <div class="auth-divider"><span>Уже есть аккаунт?</span></div>
+
+      <div class="panel auth-panel auth-panel-secondary" style="text-align:center">
+        <p class="muted">Если вы уже зарегистрированы, вернитесь на страницу входа.</p>
+        <a class="btn auth-submit" href="account.html">Перейти ко входу</a>
+      </div>
+    </div>
+
+    <div id="registerDone" class="hidden">
+      <div class="panel">
+        <h4>Вы уже вошли в аккаунт</h4>
+        <p class="muted">Перейдите в личный кабинет, чтобы посмотреть свои заказы, или продолжайте покупки.</p>
+        <div class="row wrap" style="margin-top:14px">
+          <a class="btn primary" href="account.html">Открыть аккаунт</a>
+          <a class="btn" href="catalog.html">Перейти в каталог</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="js-data.js"></script>
+<script src="js-common.js"></script>
+<script src="js-page-register.js"></script>
+</body>
+</html>
